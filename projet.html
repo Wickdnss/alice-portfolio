@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio d'Alice Goupilleau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: none;
+            position: relative;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Page d'accueil */
+        #home {
+            background: linear-gradient(135deg, #f5e6e8 0%, #e8d5d8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 300px;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            from { transform: translate(-10%, -10%) rotate(0deg); }
+            to { transform: translate(-10%, -10%) rotate(360deg); }
+        }
+
+        .home-container {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .title-section {
+            text-align: left;
+            margin-bottom: 60px;
+        }
+
+        .main-title {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            color: #c4969d;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-family: 'Brush Script MT', cursive;
+            color: #333;
+            font-weight: 400;
+            margin-left: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin-left: auto;
+        }
+
+        .card {
+            aspect-ratio: 1;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card:hover::before {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: #666;
+        }
+
+        .card-title {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .profil { background: linear-gradient(135deg, #c4969d 0%, #b58890 100%); }
+        .experiences { background: linear-gradient(135deg, #d5a8ae 0%, #c4969d 100%); }
+        .realisations { background: linear-gradient(135deg, #d5b5ba 0%, #c9a5ab 100%); }
+        .competences { background: linear-gradient(135deg, #b5a59f 0%, #a39590 100%); }
+        .memoire { background: linear-gradient(135deg, #8a7d77 0%, #756b66 100%); }
+        .contact { background: linear-gradient(135deg, #5a4d47 0%, #4a3f3a 100%); }
+
+        /* Pages intérieures */
+        .inner-page {
+            padding: 80px 40px;
+            min-height: 100vh;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-size: 24px;
+            color: #666;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .content-section {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .content-section h2 {
+            color: #c4969d;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .content-section p {
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        #profil-page { background: linear-gradient(135deg, #f5e6e8 0%, #e8d5d8 100%); }
+        #profil-page .page-title { color: #c4969d; }
+
+        #experiences-page { background: linear-gradient(135deg, #f5e8ea 0%, #ead8da 100%); }
+        #experiences-page .page-title { color: #d5a8ae; }
+
+        #realisations-page { background: linear-gradient(135deg, #f5ebe8 0%, #e8ddd8 100%); }
+        #realisations-page .page-title { color: #d5b5ba; }
+
+        #competences-page { background: linear-gradient(135deg, #ebe5e3 0%, #ddd5d3 100%); }
+        #competences-page .page-title { color: #b5a59f; }
+
+        #memoire-page { background: linear-gradient(135deg, #e0d8d5 0%, #d0c5c0 100%); }
+        #memoire-page .page-title { color: #8a7d77; }
+
+        #contact-page { background: linear-gradient(135deg, #d5ccc8 0%, #c0b5b0 100%); }
+        #contact-page .page-title { color: #5a4d47; }
+
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #c4969d;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 10px;
+        }
+
+        footer {
+            background: #7a6d68;
+            padding: 40px 20px 20px;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-social a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .footer-nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: white;
+        }
+
+        .footer-nav span {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .footer-cv {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .footer-cv a {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-cv a:hover {
+            opacity: 0.7;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #c4969d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 100;
+            color: white;
+            font-size: 24px;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            background: #b58890;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            
+            .title-section {
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page d'accueil -->
+    <div id="home" class="page active">
+        <div class="home-container">
+            <div class="title-section">
+                <div class="main-title">PORTFOLIO</div>
+                <div class="subtitle">d'Alice Goupilleau</div>
+            </div>
+            <div class="grid">
+                <div class="card profil" onclick="showPage('profil-page')">
+                    <div class="card-content">
+                        <div class="card-icon">+</div>
+                        <div class="card-title">Profil</div>
+                    </div>
+                </div>
+                <div class="card experiences" onclick="showPage('experiences-page')">
+                    <div class="card-content">
+                        <div class="card-icon">+</div>
+                        <div class="card-title">Expériences</div>
+                    </div>
+                </div>
+                <div class="card realisations" onclick="showPage('realisations-page')">
+                    <div class="card-content">
+                        <div class="card-icon">+</div>
+                        <div class="card-title">Réalisations</div>
+                    </div>
+                </div>
+                <div class="card competences" onclick="showPage('competences-page')">
+                    <div class="card-content">
+                        <div class="card-icon">+</div>
+                        <div class="card-title">Compétences</div>
+                    </div>
+                </div>
+                <div class="card memoire" onclick="showPage('memoire-page')">
+                    <div class="card-content">
+                        <div class="card-icon">+</div>
+                        <div class="card-title">Formation</div>
+                    </div>
+                </div>
+                <div class="card contact" onclick="showPage('contact-page')">
+                    <div class="card-content">
+                        <div class="card-icon">+</div>
+                        <div class="card-title">Contact</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Profil -->
+    <div id="profil-page" class="page inner-page">
+        <div class="back-btn" onclick="showPage('home')">←</div>
+        <h1 class="page-title" style="font-family: 'Brush Script MT', cursive; text-transform: none; color: #c4969d; font-weight: 400;">Ce qui m'anime ?</h1>
+        <div class="content-section">
+            <h2 style="text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Comprendre les autres, créer du lien et donner du sens</h2>
+            <p>Actuellement Community Manager au sein de la Direction de la Communication chez AG2R LA MONDIALE en alternance, je poursuis un Master Marketing & Business Digital à l'ESDES Business School.</p>
+            <p>Mon parcours m'a permis de découvrir et développer mes compétences dans le domaine de la communication digitale et du community management. J'ai eu l'opportunité de travailler dans différents secteurs : assurance, immobilier et retail.</p>
+            <p>Passionnée par la création de contenu et l'engagement communautaire, j'aime concevoir des stratégies qui parlent aux audiences et créent du lien. Ma polyvalence et mon expérience dans différents environnements m'ont permis de développer une vision globale de la communication digitale.</p>
+            <p>Je suis convaincue que la communication est un levier essentiel pour créer de la valeur, fédérer et donner du sens aux actions d'une organisation.</p>
+        </div>
+    </div>
+
+    <!-- Page Expériences -->
+    <div id="experiences-page" class="page inner-page">
+        <div class="back-btn" onclick="showPage('home')">←</div>
+        <h1 class="page-title">Expériences</h1>
+        <div class="content-section">
+            <h2>Community Manager</h2>
+            <p><strong>AG2R LA MONDIALE</strong> · Contrat en alternance<br>
+            Sept. 2023 - Sept. 2025 · 2 ans 1 mois<br>
+            Paris, France</p>
+            <p><em>Compétences : Microsoft Excel, Anglais et 13 compétences de plus</em></p>
+            <p>AG2R LA MONDIALE : mutuelle santé, prévoyance, épargne, retraite</p>
+            
+            <h2 style="margin-top: 30px;">Community Manager</h2>
+            <p><strong>HAPI IMMOBILIER</strong> · Contrat en alternance<br>
+            2022 - 2023 · 1 an<br>
+            Lyon, Auvergne-Rhône-Alpes, France</p>
+            <p><em>Compétences : Microsoft Excel, Analyse des besoins et 11 compétences de plus</em></p>
+            
+            <h2 style="margin-top: 30px;">Conseiller commercial</h2>
+            <p><strong>Orange</strong> · Contrat en alternance<br>
+            2020 - 2022 · 2 ans<br>
+            Boutique de Lyon République</p>
+            <p><em>Compétences : Anglais, Analyse des besoins et 12 compétences de plus</em></p>
+            
+            <h2 style="margin-top: 30px;">Vendeur</h2>
+            <p><strong>L'Eau Vive</strong> · Stage<br>
+            Févr. 2016 - Mars 2016 · 2 mois<br>
+            Poitiers, Nouvelle-Aquitaine, France</p>
+            <p><em>Compétences : Accueil de la clientèle, À l'écoute et 3 compétences de plus</em></p>
+        </div>
+    </div>
+
+    <!-- Page Réalisations -->
+    <div id="realisations-page" class="page inner-page">
+        <div class="back-btn" onclick="showPage('home')">←</div>
+        <h1 class="page-title">Réalisations</h1>
+        <div class="content-section">
+            <h2>Mes projets</h2>
+            <p>Une sélection de mes travaux et créations qui illustrent mon savoir-faire.</p>
+        </div>
+    </div>
+
+    <!-- Page Compétences -->
+    <div id="competences-page" class="page inner-page">
+        <div class="back-btn" onclick="showPage('home')">←</div>
+        <h1 class="page-title">Compétences</h1>
+        <div class="content-section">
+            <h2>Expertise</h2>
+            <div class="skill-list">
+                <div class="skill-item">
+                    <h3>Community Management</h3>
+                    <p>Animation de communautés digitales</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Microsoft Excel</h3>
+                    <p>Maîtrise avancée</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Analyse des besoins</h3>
+                    <p>Compréhension des attentes clients</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Anglais</h3>
+                    <p>Communication professionnelle</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Marketing Digital</h3>
+                    <p>Stratégies web et réseaux sociaux</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Accueil clientèle</h3>
+                    <p>Relation client et conseil</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Mémoire -->
+    <div id="memoire-page" class="page inner-page">
+        <div class="back-btn" onclick="showPage('home')">←</div>
+        <h1 class="page-title">Formation</h1>
+        <div class="content-section">
+            <h2>ESDES Business School</h2>
+            <p><strong>Master Marketing Digitale Business</strong><br>
+            En cours (2023-2025)</p>
+            <p>Formation spécialisée en marketing digital, stratégie de communication et business development dans l'écosystème digital.</p>
+            
+            <h2 style="margin-top: 30px;">Parcours académique</h2>
+            <p>Mon parcours à l'ESDES Business School me permet de développer une expertise complète en marketing digital, community management et stratégie de communication digitale.</p>
+            <p>La formation combine théorie et pratique grâce à l'alternance, me permettant d'appliquer directement les connaissances acquises en cours dans le monde professionnel.</p>
+        </div>
+    </div>
+
+    <!-- Page Contact -->
+    <div id="contact-page" class="page inner-page">
+        <div class="back-btn" onclick="showPage('home')">←</div>
+        <h1 class="page-title">Contact</h1>
+        <div class="content-section">
+            <h2>Restons en contact</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>alice.goupilleau@esdes.fr</span>
+                </div>
+                <div class="contact-item">
+                    <span>💼</span>
+                    <span>LinkedIn: Alice Goupilleau</span>
+                </div>
+                <div class="contact-item">
+                    <span>🏢</span>
+                    <span>AG2R LA MONDIALE - Paris, France</span>
+                </div>
+                <div class="contact-item">
+                    <span>🎓</span>
+                    <span>ESDES Business School</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (visible sur toutes les pages) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/alice-goupilleau-4b03361ba/" target="_blank" aria-label="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="mailto:alice.goupilleau@esdes.fr" aria-label="Email">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="M22,6 L12,13 L2,6"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <nav class="footer-nav">
+                <a href="#" onclick="showPage('home'); return false;">Accueil</a>
+                <span>|</span>
+                <a href="#" onclick="showPage('profil-page'); return false;">Profil</a>
+                <span>|</span>
+                <a href="#" onclick="showPage('experiences-page'); return false;">Expériences</a>
+                <span>|</span>
+                <a href="#" onclick="showPage('realisations-page'); return false;">Réalisations</a>
+                <span>|</span>
+                <a href="#" onclick="showPage('competences-page'); return false;">Compétences</a>
+                <span>|</span>
+                <a href="#" onclick="showPage('memoire-page'); return false;">Formation</a>
+                <span>|</span>
+                <a href="#" onclick="showPage('contact-page'); return false;">Contact</a>
+            </nav>
+
+            <div class="footer-cv">
+                <a href="#" download>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="12" y1="18" x2="12" y2="12"/>
+                        <line x1="9" y1="15" x2="15" y2="15"/>
+                    </svg>
+                    Télécharger mon CV
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bouton scroll to top -->
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
