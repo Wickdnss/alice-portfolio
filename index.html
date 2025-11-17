@@ -301,6 +301,7 @@
         </div>
     </section>
 
+
     <!-- Projects Section with Carousel -->
     <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
@@ -571,31 +572,6 @@
                         </div>
                     </div>
 
-                    <div>
-                        <h4 class="text-lg font-bold mb-4 text-blue-700">Centres d'intérêt</h4>
-                        <div class="grid grid-cols-3 gap-4">
-                            <div class="bg-white p-4 rounded-xl shadow-sm text-center hover:shadow-md transition-all">
-                                <svg class="w-10 h-10 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <div class="text-sm font-medium text-gray-700">Voyages</div>
-                            </div>
-                            <div class="bg-white p-4 rounded-xl shadow-sm text-center hover:shadow-md transition-all">
-                                <svg class="w-10 h-10 mx-auto mb-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-                                </svg>
-                                <div class="text-sm font-medium text-gray-700">Art</div>
-                            </div>
-                            <div class="bg-white p-4 rounded-xl shadow-sm text-center hover:shadow-md transition-all">
-                                <svg class="w-10 h-10 mx-auto mb-2 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                                <div class="text-sm font-medium text-gray-700">Mode</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
                     <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-6">
                         <div>
@@ -642,7 +618,52 @@
             </div>
         </div>
     </section>
+<section id="interests" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-blue-700">Centres d'intérêt</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Découvrez mes passions qui m'inspirent au quotidien</p>
+            </div>
 
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-md">
+                            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-blue-700">Voyages</h3>
+                    <p class="text-gray-700 text-center">Explorer de nouvelles cultures et horizons me permet de développer ma curiosité et d'enrichir mes perspectives créatives.</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-md">
+                            <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-red-700">Art</h3>
+                    <p class="text-gray-700 text-center">L'art sous toutes ses formes m'inspire et nourrit ma créativité dans la conception de contenus visuels impactants.</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-md">
+                            <svg class="w-12 h-12 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-yellow-700">Mode</h3>
+                    <p class="text-gray-700 text-center">La mode est une forme d'expression personnelle qui m'aide à comprendre les tendances et les codes visuels actuels.</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
